@@ -1,26 +1,32 @@
-//
-//  ContentView.swift
-//  PointFree
-//
-//  Created by Yenting Chen on 01/02/2024.
-//
-
 import SwiftUI
+import Combine
 
 struct ContentView: View {
+    @ObservedObject var store: Store<AppState, AppAction>
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        NavigationView {
+            VStack {
+                NavigationLink {
+                    CounterView(store: store)
+                } label: {
+                    Text("Calculate Page")
+                }
+                
+                NavigationLink {
+                    FavView(store: store)
+                } label: {
+                    Text("Fav Page")
+                }
+                
+                
+            }
         }
-        .padding()
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
+
+
+
+
+
+
