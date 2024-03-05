@@ -15,9 +15,25 @@ final class Store<Value, Action>: ObservableObject {
     }
 }
 
+struct FavoritePrimesState {
+    var favoritePrimes: [Int]
+}
+
 struct AppState {
     var count = 0
     var favoredNumbers = [Int]()
+}
+
+extension AppState {
+  var favoritePrimesState: FavoritePrimesState {
+    get {
+      return FavoritePrimesState(
+        favoritePrimes: self.favoredNumbers)
+    }
+    set {
+      self.favoredNumbers = newValue.favoritePrimes
+    }
+  }
 }
 
 enum CounterAction {

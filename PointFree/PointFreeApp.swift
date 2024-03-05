@@ -4,13 +4,34 @@ import SwiftUI
 struct PointFreeApp: App {
     
     var appState = AppState()
+    //favReducer(state:action:)
+    var body: some Scene {
+        WindowGroup {
+            ContentView(
+                store: Store(value: appState,
+                             reducer: combine(pullback(counterReducer, value: \.count),
+                                              pullback(favListReducer, value: \.favoritePrimesState),
+                                              favReducer(state:action:))))
+        }
+    }
     
-    func counterReducer(state: inout AppState, action: AppAction) {
+//    func counterReducer(state: inout AppState, action: AppAction) {
+//        switch action {
+//        case .counter(.decrTapped):
+//            state.count -= 1
+//        case .counter(.incrTapped):
+//            state.count += 1
+//        default:
+//            break
+//        }
+//    }
+    
+    func counterReducer(state: inout Int, action: AppAction) {
         switch action {
         case .counter(.decrTapped):
-            state.count -= 1
+            state -= 1
         case .counter(.incrTapped):
-            state.count += 1
+            state += 1
         default:
             break
         }
@@ -30,11 +51,11 @@ struct PointFreeApp: App {
         }
     }
     
-    func favListReducer(state: inout AppState, action: AppAction) {
+    func favListReducer(state: inout FavoritePrimesState, action: AppAction) {
         switch action {
         case let .fav(.removeFrom(index)):
             for index in index {
-                state.favoredNumbers.remove(at: index)
+                state.favoritePrimes.remove(at: index)
             }
             
         default:
@@ -42,7 +63,13 @@ struct PointFreeApp: App {
         }
     }
     
-    
+//    func combine<Value, Action>(_ first: @escaping (inout Value, Action) -> Void, _ second: @escaping (inout Value, Action) -> Void) -> (inout Value, Action) -> Void {
+//        return { (value, action) in
+//            first(&value, action)
+//            second(&value, action)
+//        }
+//    }
+
     func combine<Value, Action>(
         _ reducers: (inout Value, Action) -> Void...
     ) -> (inout Value, Action) -> Void {
@@ -53,9 +80,24 @@ struct PointFreeApp: App {
         }
     }
     
-    var body: some Scene {
-        WindowGroup {
-            ContentView(store: Store(value: appState, reducer: combine(counterReducer(state:action:), favReducer(state:action:), favListReducer(state:action:))))
+//    func pullback<LocalValue, GlobalValue, Action>(
+//        _ reducer: @escaping (inout LocalValue, Action) -> Void,
+//        get: @escaping (GlobalValue) -> LocalValue,
+//        set: @escaping (inout GlobalValue, LocalValue) -> Void
+//    ) -> (inout GlobalValue, Action) -> Void {
+//        return { (globalValue, action) in
+//            var localValue = get(globalValue)
+//            reducer(&localValue, action)
+//            set(&globalValue, localValue)
+//        }
+//    }
+    
+    func pullback<LocalValue, GlobalValue, Action>(
+        _ reducer: @escaping (inout LocalValue, Action) -> Void,
+        value: WritableKeyPath<GlobalValue, LocalValue>
+    ) -> (inout GlobalValue, Action) -> Void {
+        return { (globalValue, action) in
+            reducer(&globalValue[keyPath: value], action)
         }
     }
 }

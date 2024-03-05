@@ -9,7 +9,7 @@ struct CounterView: View {
         VStack {
             HStack {
                 Button("-") {
-
+                    
                     self.store.send(.counter(.decrTapped))
                 }
                 Text(self.store.value.count.description)
