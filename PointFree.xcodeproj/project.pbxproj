@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9DAF02A62B9C803300A5A23F /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAF02A52B9C803300A5A23F /* AppState.swift */; };
+		9DAF02AA2B9CCE1600A5A23F /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAF02A92B9CCE1500A5A23F /* Store.swift */; };
 		9DEADBAF2B6B84AE00E89616 /* PointFreeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEADBAE2B6B84AE00E89616 /* PointFreeApp.swift */; };
 		9DEADBB12B6B84AE00E89616 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEADBB02B6B84AE00E89616 /* ContentView.swift */; };
 		9DEADBB32B6B84AF00E89616 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DEADBB22B6B84AF00E89616 /* Assets.xcassets */; };
@@ -18,6 +19,7 @@
 
 /* Begin PBXFileReference section */
 		9DAF02A52B9C803300A5A23F /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		9DAF02A92B9CCE1500A5A23F /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		9DEADBAB2B6B84AE00E89616 /* PointFree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PointFree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DEADBAE2B6B84AE00E89616 /* PointFreeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointFreeApp.swift; sourceTree = "<group>"; };
 		9DEADBB02B6B84AE00E89616 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 				9DEADBC02B6F59D600E89616 /* FavoriteNumbersView.swift */,
 				9DEADBB22B6B84AF00E89616 /* Assets.xcassets */,
 				9DEADBB42B6B84AF00E89616 /* Preview Content */,
+				9DAF02A92B9CCE1500A5A23F /* Store.swift */,
 			);
 			path = PointFree;
 			sourceTree = "<group>";
@@ -151,6 +154,7 @@
 				9DEADBB12B6B84AE00E89616 /* ContentView.swift in Sources */,
 				9DEADBC12B6F59D600E89616 /* FavoriteNumbersView.swift in Sources */,
 				9DAF02A62B9C803300A5A23F /* AppState.swift in Sources */,
+				9DAF02AA2B9CCE1600A5A23F /* Store.swift in Sources */,
 				9DEADBAF2B6B84AE00E89616 /* PointFreeApp.swift in Sources */,
 				9DEADBBD2B6F591900E89616 /* CounterView.swift in Sources */,
 			);

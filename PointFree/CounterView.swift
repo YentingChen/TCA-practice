@@ -2,20 +2,21 @@ import SwiftUI
 import Combine
 
 struct CounterView: View {
-    @ObservedObject var state: AppState
+//    @ObservedObject var state: AppState
+    @ObservedObject var store: Store<AppState>
     var body: some View {
         VStack {
             HStack {
-                Button(action: { self.state.count -= 1 }) {
+                Button(action: { self.store.value.count -= 1 }) {
                     Text("-")
                 }
-                Text("\(self.state.count)")
-                Button(action: { self.state.count += 1 }) {
+                Text("\(self.store.value.count)")
+                Button(action: { self.store.value.count += 1 }) {
                     Text("+")
                 }
             }
             Button(action: {
-              self.state.favoriteNumbers.append(self.state.count)
+                self.store.value.favoriteNumbers.append(self.store.value.count)
 
             }) {
               Text("Save to favorite numbers")

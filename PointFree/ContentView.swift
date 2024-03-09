@@ -2,19 +2,20 @@ import SwiftUI
 import Combine
 
 struct ContentView: View {
-  @ObservedObject var state: AppState
-
-  var body: some View {
-    NavigationView {
-      List {
-        NavigationLink(destination: CounterView(state: self.state)) {
-          Text("Counter")
+    //  @ObservedObject var state: AppState
+    @ObservedObject var store: Store<AppState>
+    
+    var body: some View {
+        NavigationView {
+            List {
+                NavigationLink(destination: CounterView(store: self.store)) {
+                    Text("Counter")
+                }
+                NavigationLink(destination: FavoriteNumbersView(store: self.store)) {
+                    Text("Favorite numbers")
+                }
+            }
+            .navigationBarTitle("Home")
         }
-        NavigationLink(destination: FavoriteNumbersView(state: self.state)) {
-          Text("Favorite numbers")
-        }
-      }
-      .navigationBarTitle("Home")
     }
-  }
 }
