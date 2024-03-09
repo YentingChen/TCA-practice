@@ -2,31 +2,19 @@ import SwiftUI
 import Combine
 
 struct ContentView: View {
-    @ObservedObject var store: Store<AppState, AppAction>
-    var body: some View {
-        NavigationView {
-            VStack {
-                NavigationLink {
-                    CounterView(store: store)
-                } label: {
-                    Text("Calculate Page")
-                }
-                
-                NavigationLink {
-                    FavView(store: store)
-                } label: {
-                    Text("Fav Page")
-                }
-                
-                
-            }
+  @ObservedObject var state: AppState
+
+  var body: some View {
+    NavigationView {
+      List {
+        NavigationLink(destination: CounterView(state: self.state)) {
+          Text("Counter demo")
         }
+        NavigationLink(destination: FavoritePrimesView(state: self.$state.favoritePrimesState)) {
+          Text("Favorite primes")
+        }
+      }
+      .navigationBarTitle("State management")
     }
+  }
 }
-
-
-
-
-
-
-

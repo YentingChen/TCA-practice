@@ -2,53 +2,45 @@ import SwiftUI
 import Combine
 
 struct CounterView: View {
-    @ObservedObject var store: Store<AppState, AppAction>
-    @State var isSheetShown = false
-    @State var isAlertShown = false
+    @ObservedObject var state: AppState
+    @State var isPrimeModalShown: Bool = false
+    @State var alertNthPrime: PrimeAlert?
+    @State var isNthPrimeButtonDisabled = false
+    
+    
+    private func ordinal(_ n: Int) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .ordinal
+        return formatter.string(for: n) ?? ""
+    }
+    
+    
     var body: some View {
         VStack {
             HStack {
-                Button("-") {
-                    
-                    self.store.send(.counter(.decrTapped))
+                Button(action: { self.state.count -= 1 }) {
+                    Text("-")
                 }
-                Text(self.store.value.count.description)
-                Button("+") {
-                    self.store.send(.counter(.incrTapped))
+                Text("\(self.state.count)")
+                Button(action: { self.state.count += 1 }) {
+                    Text("+")
                 }
+            }
+            Button(action: { self.isPrimeModalShown = true }) {
+                Text("Is this prime?")
             }
             
-            Button("Save") {
-                self.store.send(.fav(.save))
-
-            }
-            
-            Button("Delete") {
-
-                isAlertShown = store.value.favoredNumbers.count == 0
-
-
-                
-            }
-            Button("Show page") {
-                isSheetShown = true
-            }
         }
         .font(.title)
         .navigationBarTitle("Counter demo")
-        .sheet(
-            isPresented:
-                $isSheetShown,
-            onDismiss: {
-                isSheetShown = false
-            },
-            content: {
-                SheetView(store: self.store)
-            })
-        .alert(
-            isPresented: $isAlertShown,
-            content: {
-                Alert(title: Text("hey"))
-            })
+        .sheet(isPresented: self.$isPrimeModalShown) {
+            IsPrimeModalView(state: self.state)
+        }
+        .alert(item: self.$alertNthPrime) { alert in
+            Alert(
+                title: Text("The \(ordinal(self.state.count)) prime is \(alert.prime)"),
+                dismissButton: .default(Text("Ok"))
+            )
+        }
     }
 }
