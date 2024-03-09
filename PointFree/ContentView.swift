@@ -8,13 +8,13 @@ struct ContentView: View {
     NavigationView {
       List {
         NavigationLink(destination: CounterView(state: self.state)) {
-          Text("Counter demo")
+          Text("Counter")
         }
-        NavigationLink(destination: FavoritePrimesView(state: self.$state.favoritePrimesState)) {
-          Text("Favorite primes")
+        NavigationLink(destination: FavoriteNumbersView(state: self.state)) {
+          Text("Favorite numbers")
         }
       }
-      .navigationBarTitle("State management")
+      .navigationBarTitle("Home")
     }
   }
 }
