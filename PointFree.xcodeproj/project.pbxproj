@@ -66,9 +66,9 @@
 				9DEADBBC2B6F591900E89616 /* CounterView.swift */,
 				9DAF02A52B9C803300A5A23F /* AppState.swift */,
 				9DEADBC02B6F59D600E89616 /* FavoriteNumbersView.swift */,
+				9DAF02A92B9CCE1500A5A23F /* Store.swift */,
 				9DEADBB22B6B84AF00E89616 /* Assets.xcassets */,
 				9DEADBB42B6B84AF00E89616 /* Preview Content */,
-				9DAF02A92B9CCE1500A5A23F /* Store.swift */,
 			);
 			path = PointFree;
 			sourceTree = "<group>";

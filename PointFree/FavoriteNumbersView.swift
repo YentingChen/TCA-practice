@@ -2,7 +2,7 @@ import SwiftUI
 import Combine
 
 struct FavoriteNumbersView: View {
-    var store: Store<AppState>
+    var store: Store<AppState, AppAction>
     
     var body: some View {
         List {
@@ -10,9 +10,7 @@ struct FavoriteNumbersView: View {
                 Text("\(fav)")
             }
             .onDelete { indexSet in
-                for index in indexSet {
-                    self.store.value.favoriteNumbers.remove(at: index)
-                }
+                self.store.send(.fav(.removeFavorite(indexSet: indexSet)))
             }
         }
         .navigationBarTitle(Text("Favorite"))

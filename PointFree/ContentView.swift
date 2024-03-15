@@ -3,7 +3,7 @@ import Combine
 
 struct ContentView: View {
     //  @ObservedObject var state: AppState
-    @ObservedObject var store: Store<AppState>
+    @ObservedObject var store: Store<AppState, AppAction>
     
     var body: some View {
         NavigationView {
